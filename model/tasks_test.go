@@ -6,7 +6,7 @@ import  (
     "github.com/wooblz/todo-list/model"
 )
 
-func TaskCreation(t *testing.T)  {
+func TestTaskCreation(t *testing.T)  {
     t.Run("test time", func(t *testing.T)  {
         start := time.Now()
         want := model.Task{
@@ -32,7 +32,7 @@ func TaskCreation(t *testing.T)  {
         }  
     })
 }
-func TaskCompletion(t *testing.T)  {
+func TestTaskCompletion(t *testing.T)  {
     t.Run("Test Completion", func(t *testing.T)  {
         got := model.Task{
             ID:          1,
@@ -48,8 +48,8 @@ func TaskCompletion(t *testing.T)  {
             t.Errorf("Expected %v, but got nil", got.CompletedAt)
         }
 
-        if got.CreatedAt.Before(start) || got.CreatedAt.After(end)  {
-            t.Errorf("Expected time between %v and %v, but got %v", start,end,got.CreatedAt)
+        if got.CompletedAt.Before(start) || got.CompletedAt.After(end)  {
+            t.Errorf("Expected time between %v and %v, but got %v", start,end,got.CompletedAt)
         }
     })
 }
