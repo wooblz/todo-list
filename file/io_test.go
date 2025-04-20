@@ -1,13 +1,11 @@
 package file
 
-import  {
+import  ( 
     "testing"
     "os"
-    "io"
     "fmt"
     "time"
-    "github.com/wooblz/todo-list/model"
-}
+)
 
 func ReadFileTest(t *testing.T)  {
     t.Run("Read File", func(t *testing.T)  {
@@ -20,14 +18,14 @@ func ReadFileTest(t *testing.T)  {
         start := time.Now()
         now := time.Now()
         end := time.Now()
-        jsonContent := fmt.Sprintf('[
+        jsonContent := fmt.Sprintf(`[
             {
                 "ID": 1,
                 "Name": Test Task,
                 "CreatedAt"; %s
                 "CompletedAt": null
             }
-        ]', now)
+        ]`, now)
 
         if _, err := tmpFile.Write([]byte(jsonContent)); err != nil {
             t.Fatalf("could not write to temp file: %v", err)
@@ -45,7 +43,9 @@ func ReadFileTest(t *testing.T)  {
         if tasks[0].Name != "Test task" {
             t.Errorf("expected task name 'Test task', got %q", tasks[0].Name)
         }
-        if tasks[0].
+        if tasks[0].CreatedAt.Before(start) || tasks[0].CreatedAt.Before(end)  {
+            t.Errorf("expected task between %v and %v, but got %v",start,end,tasks[0].CreatedAt)
+        }
         if tasks[0].CompletedAt != nil {
             t.Errorf("expected nil CompletedAt, got %v", tasks[0].CompletedAt)
         }
