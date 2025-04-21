@@ -18,6 +18,7 @@ var addCmd = &cobra.Command{
     Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) Error{
 
+        newTask := NewTask
 	},
 }
 
