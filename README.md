@@ -1,9 +1,9 @@
 
-
+## Todo List CLI
 ```markdown
 > **Note:** Got ChatGPT to write this README... because I didn't feel like it.
 
-# Todo List CLI
+## Todo List CLI
 
 A command-line application for managing to-do tasks, written in Go. This tool allows users to create, list, complete, and delete tasks stored locally in a JSON file.
 
@@ -18,7 +18,7 @@ A command-line application for managing to-do tasks, written in Go. This tool al
 
 ## Installation
 
-```bash
+
 git clone https://github.com/wooblz/todo-list.git
 cd todo-list
 go build -o tasks main.go
