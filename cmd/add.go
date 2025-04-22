@@ -16,9 +16,28 @@ var addCmd = &cobra.Command{
 	Use:   "add [task]",
 	Short: "Adds a task ",
     Args:  cobra.ExactArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) Error{
+	RunE: func(cmd *cobra.Command, args []string) error{
+        tasks, err := file.LoadTasks(dataFile)
+        if err !=nil  {
+            return fmt.Errorf("failed to load tasks %w", err)
+        }
 
-        newTask := NewTask
+        var newID int
+        for _, v := range tasks  {
+            if v.ID > newID  {
+                newID = v.ID
+            }
+        }
+        newID++
+        newTask := model.NewTask(newID, args[0])
+        tasks = append(tasks,newTask)
+
+        err = file.SaveTasks(dataFile, tasks)
+        if err != nil  {
+            return fmt.Errorf("failed to save tasks %w", err)
+        }
+
+        return nil; 
 	},
 }
 

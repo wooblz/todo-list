@@ -6,22 +6,43 @@ package cmd
 
 import (
 	"fmt"
-
+    "github.com/wooblz/todo-list/file"
+	//"github.com/wooblz/todo-list/model"
+    "strconv"
 	"github.com/spf13/cobra"
 )
 
 // completeCmd represents the complete command
 var completeCmd = &cobra.Command{
-	Use:   "complete",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Use:   "complete <task id>",
+	Short: "complete task",
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("complete called")
+	RunE: func(cmd *cobra.Command, args []string) error{
+        tasks, err := file.LoadTasks(dataFile)
+        if err != nil  {
+            return fmt.Errorf("failed to load tasks %w", err)
+        }
+
+        var flag bool
+        id, err := strconv.Atoi(args[0])
+        if err != nil  {
+            return fmt.Errorf("failed to converted id %w", err)
+        } 
+        for i, v := range tasks  {
+            if i+1 == id  {
+                flag = true
+                v.CompleteTask()
+            }
+        }
+        if !flag  {
+            return fmt.Errorf("no tasks with id %s", args[0])
+        }
+        err =file.SaveTasks(dataFile, tasks)
+        if err != nil  {
+            return fmt.Errorf("failed to save tasks %w", err)
+        }
+
+        return nil
 	},
 }
 
