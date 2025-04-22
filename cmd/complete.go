@@ -28,10 +28,10 @@ var completeCmd = &cobra.Command{
         if err != nil  {
             return fmt.Errorf("failed to converted id %w", err)
         } 
-        for i, v := range tasks  {
-            if i+1 == id  {
+        for i,v := range tasks  {
+            if v.ID == id  {
                 flag = true
-                v.CompleteTask()
+                tasks[i].CompleteTask()
             }
         }
         if !flag  {
