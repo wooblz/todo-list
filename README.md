@@ -1,4 +1,5 @@
 Note: got chatgpt to write this read me...... because i didn't feel like it
+
 Todo List CLI
 A command-line application for managing to-do tasks, written in Go. This tool allows users to create, list, complete, and delete tasks stored locally in a JSON file.
 
