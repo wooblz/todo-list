@@ -14,7 +14,7 @@ var dataFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "todo-list",
+	Use:   "tasks",
 	Short: "add, complete, delete, list ",
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
